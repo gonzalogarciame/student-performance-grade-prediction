@@ -1,64 +1,68 @@
-# Proyecto Final - Aprendizaje Automatico
+# Student Performance Grade Prediction
 
-Proyecto final de la asignatura Aprendizaje Automatico 2024/2025. El objetivo es predecir la nota final de estudiantes (`T3`) a partir de variables academicas, demograficas y sociales mediante modelos de regresion supervisada.
+Machine learning project for predicting students' final grade (`T3`) from academic, demographic, family and social variables. The project compares supervised regression models under two prediction settings: with and without prior term grades.
 
-## Objetivo
+**Project date:** Academic year 2024/2025.
 
-El proyecto compara dos escenarios de modelado:
+## Goal
 
-- **Modelo 1:** predice `T3` usando `T1`, `T2` y el resto de variables disponibles.
-- **Modelo 2:** predice `T3` sin usar `T1` ni `T2`, para evaluar el rendimiento cuando no se dispone de notas previas.
+The target is to predict `T3`, the final student grade, using the available student performance dataset.
 
-## Estructura
+Two modeling scenarios are evaluated:
+
+- **Model 1: with prior grades.** Uses `T1`, `T2` and all other available predictors.
+- **Model 2: without prior grades.** Excludes `T1` and `T2` to estimate performance when previous grades are not available.
+
+## Repository Structure
 
 ```text
 .
-|-- imports/                         # Funciones auxiliares usadas en practicas previas
+|-- imports/                              # Utility code from previous lab work
 |-- src/
-|   |-- clases.py                    # Baselines personalizados
-|   |-- exploracion.ipynb            # Analisis exploratorio inicial
-|   |-- exploracion_adicional.ipynb  # PCA, clustering y analisis adicional
-|   |-- modelo1.py                   # Modelos con T1 y T2
-|   |-- modelo2.py                   # Modelos sin T1 ni T2
-|   |-- prediccion.py                # Generacion de predicciones finales
-|   `-- preprocesado.py              # Limpieza y transformacion de datos
-|-- Informe_Proyecto_Machine_Learning.pdf
-|-- predicciones_finales.csv
+|   |-- additional_analysis.ipynb         # PCA, clustering and additional analysis
+|   |-- baseline_models.py                # Custom baseline regressors
+|   |-- exploratory_analysis.ipynb        # Initial exploratory data analysis
+|   |-- generate_predictions.py           # Final prediction generation
+|   |-- model_with_prior_grades.py        # Model 1 experiments
+|   |-- model_without_prior_grades.py     # Model 2 experiments
+|   `-- preprocessing.py                  # Data cleaning and feature engineering
+|-- final_predictions.csv                 # Final predictions included with the project
+|-- Informe_Proyecto_Machine_Learning.pdf # Original report in Spanish
 `-- requirements.txt
 ```
 
-## Modelos
+## Models
 
-### Modelo 1: con notas previas
+### Model 1: With Prior Grades
 
 - `T2Predictor`
-- Regresion lineal
+- Linear Regression
 - ElasticNet
 - SVR
 - Random Forest
 - XGBoost
 
-### Modelo 2: sin notas previas
+### Model 2: Without Prior Grades
 
-- `MediaPredictor`
+- `MeanPredictor`
 - KNN
 - ElasticNet
 - MLPRegressor
 - Random Forest
 - XGBoost
 
-## Metodologia
+## Methodology
 
-- Limpieza e imputacion de valores ausentes.
-- Transformacion de variables categoricas mediante one-hot encoding.
-- Generacion de variables derivadas, como interaccion `T1_T2_interaction` y consumo combinado de alcohol.
-- Comparacion de modelos mediante validacion cruzada de 5 folds.
-- Evaluacion con `R2`, MAE y MSE.
-- Entrenamiento final y generacion de predicciones.
+- Missing-value handling with median imputation.
+- Categorical encoding with one-hot encoding.
+- Feature engineering, including `T1_T2_interaction` and a combined alcohol-consumption feature.
+- Model selection with 5-fold cross-validation.
+- Evaluation using `R2`, MAE and MSE.
+- Final prediction generation with the selected XGBoost configurations.
 
-## Instalacion
+## Installation
 
-Se recomienda usar un entorno virtual:
+Create and activate a virtual environment:
 
 ```bash
 python -m venv .venv
@@ -66,9 +70,9 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-## Datos
+## Data
 
-Los scripts esperan los archivos originales en una carpeta `data/`:
+The scripts expect the original data files in a local `data/` directory:
 
 ```text
 data/
@@ -76,7 +80,7 @@ data/
 `-- rendimiento_estudiantes_test_vacio.csv
 ```
 
-Despues del preprocesado se generan:
+After preprocessing, the following generated files are created:
 
 ```text
 data/
@@ -84,25 +88,25 @@ data/
 `-- rendimiento_estudiantes_test_EDA.csv
 ```
 
-La carpeta `data/` se mantiene fuera de Git para evitar publicar datos brutos o generados accidentalmente.
+The `data/` directory is intentionally ignored by Git to avoid publishing raw or generated datasets by accident.
 
-## Ejecucion
+## Usage
 
-Desde la raiz del proyecto:
+Run the project from the repository root:
 
 ```bash
-python src/preprocesado.py
-python src/modelo1.py
-python src/modelo2.py
-python src/prediccion.py
+python src/preprocessing.py
+python src/model_with_prior_grades.py
+python src/model_without_prior_grades.py
+python src/generate_predictions.py
 ```
 
-El archivo final de predicciones incluido en este repositorio es:
+The final prediction file included in the repository is:
 
 ```text
-predicciones_finales.csv
+final_predictions.csv
 ```
 
-## Informe
+## Report
 
-El documento `Informe_Proyecto_Machine_Learning.pdf` resume el planteamiento, el analisis exploratorio, los experimentos realizados y las conclusiones del proyecto.
+The original written report is kept in Spanish as `Informe_Proyecto_Machine_Learning.pdf`.

@@ -53,8 +53,8 @@ class LinearRegressor:
         Returns:
             None: Modifies the model's coefficients and intercept in-place.
         """
-        columna_intercept = np.ones((X.shape[0], 1))
-        X = np.hstack((columna_intercept, X))
+        intercept_column = np.ones((X.shape[0], 1))
+        X = np.hstack((intercept_column, X))
 
         X_transpose = np.transpose(X)
         

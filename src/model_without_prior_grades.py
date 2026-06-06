@@ -16,7 +16,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from imports.Lab2_6_CV import cross_validation
 
-from clases import MediaPredictor
+from baseline_models import MeanPredictor
 
 
 if __name__ == "__main__":
@@ -30,16 +30,16 @@ if __name__ == "__main__":
 
 
 
-    print("MODELO 2") 
+    print("MODEL 2: WITHOUT PRIOR GRADES") 
 
     #--------------
-    # Primer modelo: Media_Predictor
+    # First model: MeanPredictor
     #--------------
-    media_model = MediaPredictor()
+    media_model = MeanPredictor()
     media_model.fit(X2_train, y_train)
 
     mean_score, std_score = cross_validation(media_model, X2_train, y_train, nFolds=5)
-    print("\n=== Media_Predictor Cross Validation ===")
+    print("\n=== MeanPredictor Cross Validation ===")
     print(f"R²: {mean_score:.5f} +- {std_score:.5f}")
 
     y_test_pred_media = media_model.predict(X2_test)
@@ -48,14 +48,14 @@ if __name__ == "__main__":
     test_mse_media = mean_squared_error(y_test, y_test_pred_media)
     test_r2_media = r2_score(y_test, y_test_pred_media)
 
-    print("=== Media_Predictor Test Evaluation ===")
+    print("=== MeanPredictor Test Evaluation ===")
     print(f"Test MAE: {test_mae_media:.5f}")
     print(f"Test MSE: {test_mse_media:.5f}")
     print(f"Test R²: {test_r2_media:.5f}\n")
 
 
     #--------------
-    # Segundo modelo: KNN
+    # Second model: KNN
     #--------------
     param_grid_knn = {
         'n_neighbors': [3, 5, 7, 9],
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     print(f"Test R²: {test_r2_knn:.5f}\n")
 
     #--------------
-    # Tercer modelo: ElasticNet
+    # Third model: ElasticNet
     #--------------
     param_grid_en = {
         'alpha': np.logspace(-3, 2, 10),
@@ -126,10 +126,10 @@ if __name__ == "__main__":
     print(f"Test MSE: {test_mse_en:.5f}")
     print(f"Test R²: {test_r2_en:.5f}\n")
 
-    print(f"Mejores parámetros ElasticNet: {grid_en.best_params_}")
+    print(f"Best ElasticNet parameters: {grid_en.best_params_}")
 
     #--------------
-    # Cuarto modelo: MLP
+    # Fourth model: MLP
     #--------------
     param_grid_mlp = {
         'hidden_layer_sizes': [(50,), (100,), (50, 50)],
@@ -168,7 +168,7 @@ if __name__ == "__main__":
 
 
     #--------------
-    # Quinto modelo: RandomForest
+    # Fifth model: RandomForest
     #--------------
     param_grid_rf = {
         'n_estimators': [50, 100, 200],
@@ -207,7 +207,7 @@ if __name__ == "__main__":
 
 
     #--------------
-    # Sexto modelo: XGBoost
+    # Sixth model: XGBoost
     #--------------
     param_grid_xgb = {
         'n_estimators': [100, 200],

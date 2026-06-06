@@ -1,13 +1,13 @@
 import numpy as np
 from sklearn.metrics import r2_score
 
-class MediaPredictor:
+class MeanPredictor:
     def fit(self, X, y):
-        media = np.mean(y)
-        self.media = media
+        mean_value = np.mean(y)
+        self.mean_value = mean_value
 
     def predict(self, X):
-        return np.full(X.shape[0], self.media)
+        return np.full(X.shape[0], self.mean_value)
 
     def score(self, X, y):
         y_pred = self.predict(X)
@@ -16,11 +16,11 @@ class MediaPredictor:
 class T2Predictor:
     def __init__(self, column_names, column="T2"):
         """
-        column_names: lista de nombres de las columnas en X (orden original)
-        column: nombre de la columna que se quiere usar (por defecto T2)
+        column_names: list of column names in X, using the original order.
+        column: name of the column to use as the predictor. Defaults to T2.
         """
         if column not in column_names:
-            raise ValueError(f"La columna '{column}' no se encuentra en el array de columnas.")
+            raise ValueError(f"Column '{column}' was not found in the column array.")
         self.interaction_index = column_names.index(column)
 
     def fit(self, X, y):

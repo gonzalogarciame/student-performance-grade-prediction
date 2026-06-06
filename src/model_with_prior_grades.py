@@ -19,7 +19,7 @@ from imports.lab_2_3_LinearRegression import LinearRegressor
 from imports.Lab2_6_CV import cross_validation
 from sklearn.model_selection import train_test_split
 
-from clases import T2Predictor
+from baseline_models import T2Predictor
 
 if __name__ == "__main__":
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/rendimiento_estudiantes_train_EDA.csv"), index_col=0)
@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
     X1_train, X1_test, y_train, y_test = train_test_split(X1, y, test_size=0.2,random_state=42)
 
-    print("MODELO 1")
+    print("MODEL 1: WITH PRIOR GRADES")
     # -----------------------
     # T2Predictor
     # -----------------------
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     print(f"Test MSE: {test_mse_en:.5f}")
     print(f"Test R²: {test_r2_en:.5f}\n")
 
-    print(f"Mejores parámetros ElasticNet: {grid_en.best_params_}")
+    print(f"Best ElasticNet parameters: {grid_en.best_params_}")
 
     # -----------------------
     # SVR (con GridSearchCV)
