@@ -26,8 +26,9 @@ Two modeling scenarios are evaluated:
 |   |-- model_with_prior_grades.py        # Model 1 experiments
 |   |-- model_without_prior_grades.py     # Model 2 experiments
 |   `-- preprocessing.py                  # Data cleaning and feature engineering
-|-- final_predictions.csv                 # Final predictions included with the project
 |-- Informe_Proyecto_Machine_Learning.pdf # Original report in Spanish
+|-- data/
+|   `-- final_predictions.csv             # Final predictions included with the project
 `-- requirements.txt
 ```
 
@@ -104,7 +105,7 @@ python src/generate_predictions.py
 The final prediction file included in the repository is:
 
 ```text
-final_predictions.csv
+data/final_predictions.csv
 ```
 
 ## Report

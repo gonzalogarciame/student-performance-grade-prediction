@@ -14,6 +14,7 @@ env/
 # Local data and generated model artifacts
 data/*
 !data/.gitkeep
+!data/final_predictions.csv
 *.joblib
 *.pkl
 
